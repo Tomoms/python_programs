@@ -1,0 +1,27 @@
+#!/usr/bin/python3
+from sys import argv
+r_file = '/sys/class/backlight/intel_backlight/brightness'
+cur_brightness = int(open(r_file, "r").read())
+if argv[1] == 'inc':
+	if len(argv) == 3:
+		new_brightness = cur_brightness + int(argv[2])
+		open(r_file, "w").write(str(new_brightness))
+		open(r_file, "r").close()
+		cur_brightness = new_brightness
+	else:
+		new_brightness = cur_brightness + 40
+		open(r_file, "w").write(str(new_brightness))
+		open(r_file, "r").close()
+		cur_brightness = new_brightness
+elif argv[1] == 'dec':
+	if len(argv) == 3:
+		new_brightness = cur_brightness - int(argv[2])
+		open(r_file, "w").write(str(new_brightness))
+		open(r_file, "r").close()
+		cur_brightness = new_brightness
+	else:
+		new_brightness = cur_brightness - 40
+		open(r_file, "w").write(str(new_brightness))
+		open(r_file, "r").close()
+		cur_brightness = new_brightness
+exit()
